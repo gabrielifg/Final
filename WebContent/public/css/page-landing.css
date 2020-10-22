@@ -1,0 +1,49 @@
+@charset "ISO-8859-1";
+#page-landing {
+	text-align: center;
+	min-height: 100vh;
+	display: flex;
+}
+
+#container {
+	margin: auto;
+	width: 90%;
+}
+
+.location, 
+h1 {
+	height: 16vh;
+}
+
+.options a {
+	font-size: 80%;
+	width: 10rem;
+	height: 10rem;
+	background: black;
+	border: none;
+	border-radius: 3rem;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: auto auto 10px auto;
+}
+
+.options a:hover {
+	background: #96feff;
+}
+#logo {
+	animation-delay: 50ms;
+}
+
+.location {
+	animation-delay: 100ms;
+}
+
+main h1 {
+	animation-delay: 150ms;
+}
+
+options a {
+	animation-delay: 200ms;
+}
