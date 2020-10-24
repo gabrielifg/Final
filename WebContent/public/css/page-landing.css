@@ -44,6 +44,6 @@ main h1 {
 	animation-delay: 150ms;
 }
 
-options a {
+.options a {
 	animation-delay: 200ms;
 }

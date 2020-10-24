@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  	<meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<title>Participante</title>
+ 	<link rel="stylesheet" href="./public/css/page-participante.css">
+ 	<link rel="stylesheet" href="./public/css/animation.css">
+ 	<link rel="stylesheet" href="./public/css/main.css">
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;1,800&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id="page-participante">
+		<div id="container">
+			<header>
+				<h1>Cadastro de Participante</h1>
+				<img class="logo animate-up"
+				id="logo"
+				src="./public/images/leilao.svg"
+				width="50" height="50"/>
+			</header>
+			<main>
+	
+					<label class="animate-up" for="name">Name:</label><br>
+  					<input class="animate-up" type="text" id="name" name="name"><br><br>
+  					<label class="animate-up" for="cpf">CPF :</label><br>
+ 					<input class="animate-up" oninput="mascara(this, 0)" type="text" id="cpf" name="cpf" placeholder="Ex.: 000.000.000-00" maxlength="14"><br><br>
+ 					<label class="animate-up" for="dNascimento">Data de Nascimento:</label><br>
+ 					<input class="animate-up" type="text" onkeyup="mascara(this, 1)" id="dNascimento" name="dNascimento"  placeholder="Ex.: aaaa/mm/dd" maxlength="10"><br><br>
+ 					
+					<section class="options">
+						<input class="animate-up" type="submit" value="Salvar">
+						<input class="animate-up" type="button" id= "limpar" onclick="limpar()" value="Limpar">
+						<a href="./index.html" title="Cancelar" class="animate-up">
+							<label>Cancelar</label>
+						</a>
+					</section>
+					
+					
+			</main>
+		</div>
+	</div>
+  
+</body>
+
+<script type="text/javascript">
+
+	function mascara(i, data){
+	   
+	   var v = i.value;
+	   
+	   if(isNaN(v[v.length-1])){ // impede entrar outro caractere que não seja número
+	      i.value = v.substring(0, v.length-1);
+	      return;
+	   }
+	   
+	   if(data== 0){
+		   if (v.length == 3 || v.length == 7) i.value += ".";
+		   if (v.length == 11) i.value += "-";  
+	   }else{
+		   if (v.length == 4 || v.length == 7) i.value += "/";
+	   }
+	  
+
+	}
+	
+	function limpar(){
+		document.getElementById('name').value='';
+		document.getElementById('cpf').value= null;
+		document.getElementById('dNascimento').value= null;
+	}
+		
+</script>
+</html>
