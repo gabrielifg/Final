@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 
 public class JPAUtil {
 
-	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("postgres-leilao");
+	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("leilao");
 	
 	public EntityManager getEntityManager() {
 		return factory.createEntityManager();

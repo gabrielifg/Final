@@ -4,7 +4,7 @@
         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
     version="2.0">
 
-    <persistence-unit name="postgres-leilao">
+    <persistence-unit name="leilao">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>    
             <property name="javax.persistence.jdbc.driver" 
