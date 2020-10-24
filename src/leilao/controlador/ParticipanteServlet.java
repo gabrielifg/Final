@@ -11,10 +11,4 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = "/participantes")
 public class ParticipanteServlet extends HttpServlet{
 	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		resp.sendRedirect("index.html");
-		
-	}
 }
