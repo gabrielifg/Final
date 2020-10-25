@@ -41,7 +41,7 @@ public class ParticipanteDAO {
 	}
 
 	public List<Participante> lista() {
-		TypedQuery<Participante> qry = em.createQuery("from participantes", Participante.class);
+		TypedQuery<Participante> qry = em.createQuery("from Participante", Participante.class);
 		return qry.getResultList();
 	}
 

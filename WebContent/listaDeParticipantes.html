@@ -5,6 +5,7 @@
 <title>Lista De Participantes</title>
 </head>
 <body>
+	
 	<table>
 
 		<thead>
@@ -27,22 +28,25 @@
 
  	var tabela = document.querySelector("#tbl-lParticipantes");
 	function atualizaTabela(participantes) {
-		alunos.forEach(function(participante) {
-			adicionaAlunoNaTabela(participante);
+		participantes.forEach(function(participante) {
+			adicionaParticipanteNaTabela(participante);
 		});
 	}
-	function adicionaAlunoNaTabela(participante) {
+	function adicionaParticipanteNaTabela(participante) {
 		var tr = montaTr(participante);
 		tabela.appendChild(tr);
 	}
+	
 	function montaTr(participante) {
 		var tr = document.createElement("tr");
 
 		var nameTd = montaTd(participante.name);
 		var cpfTd = montaTd(participante.cpf);
-
+		var dataNascimentoTd = montaTd(participante.dataAniversario);
+		
 		tr.appendChild(cpfTd);
 		tr.appendChild(nameTd);
+		tr.appendChild(dataNascimentoTd)
 
 		var tdEditar = montaTdControle(participante, "editar");
 		var tdExcluir = montaTdControle(participante, "excluir");
@@ -50,7 +54,7 @@
 		tr.appendChild(tdEditar);
 		tr.appendChild(tdExcluir);
 
-		tr.setAttribute("id", aluno.cpf);
+		tr.setAttribute("id", participante.cpf);
 
 		return tr;
 	}
@@ -59,12 +63,12 @@
 		var link = document.createElement("a");
 
 		const params = new URLSearchParams({
-			participante : participante.cpf,
+			cpf : participante.cpf,
 			operacao : tipo
 		});
 
 		link.textContent = tipo;
-		link.setAttribute('href', "participantes?" + params.toString());
+		link.setAttribute('href', "listaDeParticipantes?" + params.toString());
 		link.setAttribute('id', participante.cpf);
 
 		var tdControle = document.createElement("td");
