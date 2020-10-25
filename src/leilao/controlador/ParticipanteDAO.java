@@ -26,6 +26,7 @@ public class ParticipanteDAO {
 		}else {
 			existente.setCpf(participante.getCpf());
 			existente.setName(participante.getName());
+			existente.setDataAniversario(participante.getDataAniversario());
 			em.persist(existente);
 		}
 		em.getTransaction().commit();
@@ -40,7 +41,7 @@ public class ParticipanteDAO {
 	}
 
 	public List<Participante> lista() {
-		TypedQuery<Participante> qry = em.createQuery("from participante", Participante.class);
+		TypedQuery<Participante> qry = em.createQuery("from participantes", Participante.class);
 		return qry.getResultList();
 	}
 

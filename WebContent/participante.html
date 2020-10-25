@@ -20,21 +20,24 @@
 				width="50" height="50"/>
 			</header>
 			<main>
-	
-					<label class="animate-up" for="name">Nome:</label><br>
-  					<input class="animate-up" type="text" id="name" name="name"><br><br>
-  					<label class="animate-up" for="cpf">CPF :</label><br>
- 					<input class="animate-up" oninput="mascara(this, 0)" type="text" id="cpf" name="cpf" placeholder="Ex.: 000.000.000-00" maxlength="14"><br><br>
- 					<label class="animate-up" for="dNascimento">Data de Nascimento:</label><br>
- 					<input class="animate-up" type="text" onkeyup="mascara(this, 1)" id="dNascimento" name="dNascimento"  placeholder="Ex.: aaaa/mm/dd" maxlength="10"><br><br>
- 					
+					<form action="participantes" id="form" method="post">
+						<label class="animate-up" for="name">Nome:</label><br>
+	  					<input class="animate-up" type="text" id="name" name="name"><br><br>
+	  					<label class="animate-up" for="cpf">CPF :</label><br>
+	 					<input class="animate-up" oninput="mascara(this, 0)" type="text" id="cpf" name="cpf" placeholder="Ex.: 000.000.000-00" maxlength="14"><br><br>
+	 					<label class="animate-up" for="dNascimento">Data de Nascimento:</label><br>
+	 					<input class="animate-up" type="text" onkeyup="mascara(this, 1)" id="dNascimento" name="dNascimento"  placeholder="Ex.: aaaa/mm/dd" maxlength="10"><br><br>
+	 					<input class="animate-up" type="submit" value="Salvar">
+					</form>
+					
 					<section class="options">
-						<input class="animate-up" type="submit" value="Salvar">
-						<input class="animate-up" type="button" id= "limpar" onclick="limpar()" value="Limpar">
-						<a href="./index.html" title="Cancelar" class="animate-up">
-							<label>Cancelar</label>
-						</a>
-					</section>
+							<p>
+								<input class="animate-up" type="button" id= "limpar" onclick="limpar()" value="Limpar">
+							</p>
+							<a href="./index.html" title="Cancelar" class="animate-up">
+								<label>Cancelar</label>
+							</a>
+						</section>
 					
 					
 			</main>
@@ -69,6 +72,5 @@
 		document.getElementById('cpf').value= null;
 		document.getElementById('dNascimento').value= null;
 	}
-		
 </script>
 </html>
