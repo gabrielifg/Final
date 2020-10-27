@@ -1,7 +1,11 @@
 package leilao.controlador;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -94,14 +98,20 @@ public class LeilaoServlet extends HttpServlet{
 			System.out.println("não é possível salvar com campos vazios");
 			resp.sendRedirect("cadastro-leilao.html");
 		}else {
-			
-			leilao.setDescricao(descricao);
-			leilao.setDataCriacao(new Date(dataCriacao));
-			leilao.setValorInicial(Double.parseDouble(valorInicial));
-			leilao.setSituacao(situacao);
-
-			ldao.salva(leilao);
-			resp.sendRedirect("listaDeLeilao.html");
+			if(calculaDataCriacao(dataCriacao, "yyyy/MM/dd") < 5 && calculaDataCriacao(dataCriacao, "yyyy/MM/dd") > (-5)) {
+				leilao.setDescricao(descricao);
+				leilao.setDataCriacao(new Date(dataCriacao));
+				leilao.setValorInicial(Double.parseDouble(valorInicial));
+				leilao.setSituacao(situacao);
+	
+				ldao.salva(leilao);
+				resp.sendRedirect("listaDeLeilao.html");
+			}else {
+				System.out.println("Não é possível cadastrar um leilão com 5 anos de antecedencia ou"
+						+ " um leilão com mais de 5 anos");
+				resp.sendRedirect("cadastro-leilao.html");
+			}
+				
 		}
 		
 
@@ -159,4 +169,45 @@ public class LeilaoServlet extends HttpServlet{
 			return false;
 		}
 	}
+	
+	public static int calculaDataCriacao(String dataNasc, String pattern){
+
+		DateFormat sdf = new SimpleDateFormat(pattern);
+
+		Date dataNascInput = null;
+
+		try {
+
+		dataNascInput= sdf.parse(dataNasc);
+
+		} catch (Exception e) {}
+
+		 
+
+		Calendar dateOfBirth = new GregorianCalendar();
+
+		dateOfBirth.setTime(dataNascInput);
+
+		// Cria um objeto calendar com a data atual
+
+		Calendar today = Calendar.getInstance();
+
+		// Obtém a idade baseado no ano
+
+		int age = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
+
+		 
+
+		dateOfBirth.add(Calendar.YEAR, age);
+
+		if (today.before(dateOfBirth)) {
+
+			age--;
+
+		}
+		System.out.println(age);
+		return age;
+
+	}
+	
 }
