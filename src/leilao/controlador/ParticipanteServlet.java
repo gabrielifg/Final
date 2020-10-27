@@ -1,7 +1,11 @@
 package leilao.controlador;
 import leilao.entidades.Participante;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,11 +29,25 @@ public class ParticipanteServlet extends HttpServlet{
 		String nome = req.getParameter("name");
 		String dataAniversario = req.getParameter("dataAniversario");
 		
-		@SuppressWarnings("deprecation")
-		Participante participante = new Participante(nome, cpf, new Date(dataAniversario));
-		ParticipanteDAO dao = new ParticipanteDAO();
-		dao.salva(participante);
-		resp.sendRedirect("listaDeParticipantes.html");
+		
+		if(cpf == null || nome == "" || dataAniversario == null) {
+			System.out.println("não é possível salvar com campos vazios");
+			resp.sendRedirect("cadastro-participante.html");
+		}else {
+			int maiorIdade = calculaIdade(dataAniversario, "yyyy/MM/dd");
+			if(maiorIdade >= 18) {
+				@SuppressWarnings("deprecation")
+				Participante participante = new Participante(nome, cpf, new Date(dataAniversario));
+				ParticipanteDAO dao = new ParticipanteDAO();
+				dao.salva(participante);
+				resp.sendRedirect("listaDeParticipantes.html");
+			}else {
+				System.out.println("Só é possível cadastra pessoas com 18 anos ou mais");
+				resp.sendRedirect("cadastro-participante.html");
+			}
+			
+		}
+		
 		
 		
 		
@@ -65,4 +83,45 @@ public class ParticipanteServlet extends HttpServlet{
 					}
 				}
 	}
+	
+	public static int calculaIdade(String dataNasc, String pattern){
+
+		DateFormat sdf = new SimpleDateFormat(pattern);
+
+		Date dataNascInput = null;
+
+		try {
+
+		dataNascInput= sdf.parse(dataNasc);
+
+		} catch (Exception e) {}
+
+		 
+
+		Calendar dateOfBirth = new GregorianCalendar();
+
+		dateOfBirth.setTime(dataNascInput);
+
+		// Cria um objeto calendar com a data atual
+
+		Calendar today = Calendar.getInstance();
+
+		// Obtém a idade baseado no ano
+
+		int age = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
+
+		 
+
+		dateOfBirth.add(Calendar.YEAR, age);
+
+		if (today.before(dateOfBirth)) {
+
+			age--;
+
+		}
+
+		return age;
+
+	}
+
 }

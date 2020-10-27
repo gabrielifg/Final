@@ -86,20 +86,24 @@ public class LeilaoServlet extends HttpServlet{
 		String id = null;
 		id = req.getParameter("id");
 
-		
-		System.out.println("ID: "+id);
 		if(isNumeric(id)) {
 			leilao.setId(Long.parseLong(id));
 		}
 		
+		if(descricao == "" || valorInicial == null || dataCriacao == null) {
+			System.out.println("não é possível salvar com campos vazios");
+			resp.sendRedirect("cadastro-leilao.html");
+		}else {
+			
+			leilao.setDescricao(descricao);
+			leilao.setDataCriacao(new Date(dataCriacao));
+			leilao.setValorInicial(Double.parseDouble(valorInicial));
+			leilao.setSituacao(situacao);
 
-		leilao.setDescricao(descricao);
-		leilao.setDataCriacao(new Date(dataCriacao));
-		leilao.setValorInicial(Double.parseDouble(valorInicial));
-		leilao.setSituacao(situacao);
-
-		ldao.salva(leilao);
-		resp.sendRedirect("listaDeLeilao.html");
+			ldao.salva(leilao);
+			resp.sendRedirect("listaDeLeilao.html");
+		}
+		
 
 	}
 
