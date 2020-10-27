@@ -30,22 +30,16 @@ public class ParticipanteServlet extends HttpServlet{
 		String dataAniversario = req.getParameter("dataAniversario");
 		
 		
-		if(cpf == null || nome == "" || dataAniversario == null) {
-			System.out.println("não é possível salvar com campos vazios");
-			resp.sendRedirect("cadastro-participante.html");
+		int maiorIdade = calculaIdade(dataAniversario, "yyyy/MM/dd");
+		if(maiorIdade >= 18 && maiorIdade < 120) {
+			@SuppressWarnings("deprecation")
+			Participante participante = new Participante(nome, cpf, new Date(dataAniversario));
+			ParticipanteDAO dao = new ParticipanteDAO();
+			dao.salva(participante);
+			resp.sendRedirect("listaDeParticipantes.html");
 		}else {
-			int maiorIdade = calculaIdade(dataAniversario, "yyyy/MM/dd");
-			if(maiorIdade >= 18) {
-				@SuppressWarnings("deprecation")
-				Participante participante = new Participante(nome, cpf, new Date(dataAniversario));
-				ParticipanteDAO dao = new ParticipanteDAO();
-				dao.salva(participante);
-				resp.sendRedirect("listaDeParticipantes.html");
-			}else {
-				System.out.println("Só é possível cadastra pessoas com 18 anos ou mais");
-				resp.sendRedirect("cadastro-participante.html");
-			}
-			
+			System.out.println("Só é possível cadastra pessoas com menos de 18 anos ou mais de 120 ");
+			resp.sendRedirect("cadastro-participante.html");
 		}
 		
 		

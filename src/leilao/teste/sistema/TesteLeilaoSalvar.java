@@ -23,8 +23,8 @@ public class TesteLeilaoSalvar {
 		browser.close();
 	}
 	
-	@Test
-	public void devSalvarLeilao() {
+	//@Test
+	/*public void devSalvarLeilao() {
 		browser.get("http://localhost:8080/Final/cadastro-leilao.html");
 		WebElement campoDescricao = browser.findElement(By.name("descricao"));
 		WebElement campoValorInicial = browser.findElement(By.name("valorInicial"));
@@ -42,5 +42,5 @@ public class TesteLeilaoSalvar {
 			e.printStackTrace();
 		}
 		btnSalvar.click();
-	}
+	}*/
 }

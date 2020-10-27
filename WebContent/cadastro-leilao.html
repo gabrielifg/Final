@@ -36,9 +36,11 @@
 						    <option value="encerrado">encerrado</option>
 						 </select>
 						  <br><br>
-						  <section class="options">
-						  	<input class="animate-up" type="submit" onclick="gambiara()" name = "Salvar" value="Salvar">
+						  <input class="animate-up" type="submit" onclick="gambiara()" name = "Salvar" value="Salvar">
 							<br><br>
+					</form>
+					
+					<section class="options">
 							<p>
 								<input class="animate-up" type="button" id= "limpar" onclick="limpar()" value="Limpar">
 							</p>
@@ -47,8 +49,6 @@
 								<label>Cancelar</label>
 							</a>
 						</section>
-	 					
-					</form>
 					
 					
 					
@@ -87,7 +87,7 @@
 		inputId.value = leilao.id;
 		inputDescricao.value = leilao.descricao;
 		inputValorInicial.value = leilao.valorInicial;
-		inputDataCriacao.value = leilao.dataCriacao;
+		inputDataCriacao.value = splitString(leilao.dataCriacao);
 		inputSituacao.value = leilao.situacao;
 		
 	}
@@ -114,6 +114,71 @@
 	  
 
 	}
+	
+	function splitString(data){
+		console.log(data)
+		let mesString = data.split('.')
+		let corte = mesString[1]
+		
+		let dia = corte.split(',')
+		
+		//console.log(dia[0])
+		let mesNum = 0
+		let diaF = dia[0]
+		let teste = diaF.split(' ');
+		console.log(teste)
+		let diaFF = teste[1]
+		let ano = dia[1]
+		let anoInutil = ano.split(' ')
+		let anoUtil = anoInutil[1]
+		switch (mesString[0]) {
+		case "jan":
+			mesNum = "01"
+			break;
+		case "fev":
+			mesNum = "02"
+			break;
+		case "mar":
+			mesNum = "03"
+			break;
+		case "abr":
+			mesNum = "04"
+			break;
+		case "mai":
+			mesNum = "05"
+			break;
+		case "jun":
+			mesNum = "06"
+			break;
+		case "jul":
+			mesNum = "07"
+			break;
+		case "ago":
+			mesNum = "08"
+			break;
+		case "set":
+			mesNum = "09"
+			break;
+		case "out":
+			mesNum = "10"
+			break;
+		case "nov":
+			mesNum = "11"
+			break;
+		case "jan":
+			mesNum = "12"
+			break;
+		default:
+			break;
+		}
+		if(diaFF < 10){
+			return `${anoUtil}/${mesNum}/0${diaFF}`
+		}else{
+			return `${anoUtil}/${mesNum}/${diaFF}`
+		}
+		
+	}
+	
 	
 	function limpar(){
 		document.getElementById('descricao').value='';

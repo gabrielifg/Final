@@ -22,24 +22,23 @@
 			<main>
 					<form action="listaDeParticipantes" id="form" method="post">
 						<label class="animate-up" for="name">Nome:</label><br>
-	  					<input class="animate-up" type="text" id="name" name="name"><br><br>
+	  					<input class="animate-up" required type="text" id="name" name="name"><br><br>
 	  					<label class="animate-up" for="cpf">CPF :</label><br>
-	 					<input class="animate-up" oninput="mascara(this, 0)" type="text" id="cpf" name="cpf" placeholder="Ex.: 000.000.000-00" maxlength="14"><br><br>
+	 					<input class="animate-up" required oninput="mascara(this, 0)" type="text" id="cpf" name="cpf" placeholder="Ex.: 000.000.000-00" maxlength="14"><br><br>
 	 					<label class="animate-up" for="dataAniversario">Data de Nascimento:</label><br>
-	 					<input class="animate-up" type="text" onkeyup="mascara(this, 1)" id="dataAniversario" name="dataAniversario"  placeholder="Ex.: aaaa/mm/dd" maxlength="10"><br><br>
-	 					
-						<section class="options">
-							<input class="animate-up" type="submit" onclick="gambiara()" name="Salvar" value="Salvar">
-							<br><br>
+	 					<input class="animate-up" required type="text" onkeyup="mascara(this, 1)" id="dataAniversario" name="dataAniversario"  placeholder="Ex.: aaaa/mm/dd" maxlength="10"><br><br>
+	 					<input class="animate-up" type="submit" onclick="gambiara()" name="Salvar" value="Salvar">
+						<br><br>
+					</form>
+					<section class="options">
 							<p>
-								<input class="animate-up" type="button" id= "limpar" onclick="limpar()" value="Limpar">
+								<input class="animate-up" type="button" id= "limpar" onclick="limpar()" value="limpar">
 							</p>
 							<br>
 							<a href="./index.html" title="Cancelar" class="animate-up">
 								<label>Cancelar</label>
 							</a>
-						</section>
-					</form>
+					</section>
 					
 					
 					
@@ -74,17 +73,76 @@
 		document.getElementById("cpf").disabled = true;
 		inputCpf.value = participante.cpf;
 		inputName.value = participante.name;
-		inputDataNascimento.value = participante.dataAniversario;
+		inputDataNascimento.value = splitString(participante.dataAniversario)
 		
+	}
+	
+	function splitString(data){
+		console.log(data)
+		let mesString = data.split('.')
+		let parteDA = mesString[1]
+		
+		let dia = parteDA.split(',')
+		
+		//console.log(dia[0])
+		let mesNum = 0
+		let diaF = dia[0]
+		let corteD = diaF.split(' ');
+		let diaFF = corteD[1]
+		let ano = dia[1]
+		let anoInutil = ano.split(' ')
+		let anoUtil = anoInutil[1]
+		switch (mesString[0]) {
+		case "jan":
+			mesNum = "01"
+			break;
+		case "fev":
+			mesNum = "02"
+			break;
+		case "mar":
+			mesNum = "03"
+			break;
+		case "abr":
+			mesNum = "04"
+			break;
+		case "mai":
+			mesNum = "05"
+			break;
+		case "jun":
+			mesNum = "06"
+			break;
+		case "jul":
+			mesNum = "07"
+			break;
+		case "ago":
+			mesNum = "08"
+			break;
+		case "set":
+			mesNum = "09"
+			break;
+		case "out":
+			mesNum = "10"
+			break;
+		case "nov":
+			mesNum = "11"
+			break;
+		case "jan":
+			mesNum = "12"
+			break;
+		default:
+			break;
+		}
+		if(diaFF < 10){
+			return `${anoUtil}/${mesNum}/0${diaFF}`
+		}else{
+			return `${anoUtil}/${mesNum}/${diaFF}`
+		}
 	}
 	
 	function gambiara(){	
 		document.getElementById("cpf").disabled = false;
 	}
 	
-	function vazio(){
-		
-	}
 	function mascara(i, data){
 	   
 	   var v = i.value;

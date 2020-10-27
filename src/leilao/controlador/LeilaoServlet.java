@@ -94,10 +94,6 @@ public class LeilaoServlet extends HttpServlet{
 			leilao.setId(Long.parseLong(id));
 		}
 		
-		if(descricao == "" || valorInicial == null || dataCriacao == null) {
-			System.out.println("não é possível salvar com campos vazios");
-			resp.sendRedirect("cadastro-leilao.html");
-		}else {
 			if(calculaDataCriacao(dataCriacao, "yyyy/MM/dd") < 5 && calculaDataCriacao(dataCriacao, "yyyy/MM/dd") > (-5)) {
 				leilao.setDescricao(descricao);
 				leilao.setDataCriacao(new Date(dataCriacao));
@@ -111,8 +107,6 @@ public class LeilaoServlet extends HttpServlet{
 						+ " um leilão com mais de 5 anos");
 				resp.sendRedirect("cadastro-leilao.html");
 			}
-				
-		}
 		
 
 	}
