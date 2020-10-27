@@ -1,0 +1,39 @@
+@charset "ISO-8859-1";
+#page-leilao {
+	text-align: center;
+	min-height: 100vh;
+	display: flex;
+}
+
+#container {
+	margin: 0 auto auto auto;
+	width: 90%;
+}
+
+label {
+	display: flex;
+	margin: auto auto auto 580px;
+}
+
+#logo {
+	animation-delay: 50ms;
+}
+
+.options a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 5px auto auto 80px;
+	
+}
+
+label,
+input {
+	animation-delay: 100ms;
+}
+
+.options {
+	margin: 5px auto auto auto;
+	animation-delay: 200ms;
+}
+

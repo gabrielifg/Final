@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.junit.Test;
+
 import com.google.gson.Gson;
 
 
@@ -27,6 +30,9 @@ public class ParticipanteServlet extends HttpServlet{
 		ParticipanteDAO dao = new ParticipanteDAO();
 		dao.salva(participante);
 		resp.sendRedirect("listaDeParticipantes.html");
+		
+		
+		
 	}
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

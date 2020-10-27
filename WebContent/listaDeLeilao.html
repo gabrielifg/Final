@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lista De leilao</title>
+</head>
+<body>
+	<h1>Lista de Leilao</h1>
+	
+	<table>
+
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Descrição</th>
+				<th> DATA DA CRIAÇÃO </th>
+				<th> VALOR INICIAL </th>
+				<th> SITUAÇÃO</th>
+				<th> Valor Arremate</th>
+				<th>Editar</th>
+				<th>Excluir</th>
+			</tr>
+		</thead>
+
+
+		<tbody id="tbl-lLeilao">
+
+		</tbody>
+	</table>
+	
+	<form method="get" action="./index">
+			<input type="submit" value="Voltar" />
+	</form>
+
+</body>
+
+<script>
+
+ 	var tabela = document.querySelector("#tbl-lLeilao");
+	function atualizaTabela(leilao) {
+		leilao.forEach(function(leilao) {
+			adicionaLeilaoNaTabela(leilao);
+		});
+	}
+	function adicionaLeilaoNaTabela(leilao) {
+		var tr = montaTr(leilao);
+		tabela.appendChild(tr);
+	}
+	
+	function montaTr(leilao) {
+		var tr = document.createElement("tr");
+
+		var idTd = montaTd(leilao.id);
+		var descricaoTd = montaTd(leilao.descricao);
+		var dataCriacaoTd = montaTd(leilao.dataCriacao);
+		var valorInicialTd = montaTd(leilao.valorInicial);
+		var valorArremateTd = montaTd(leilao.valorArremate);
+		var situacaoTd = montaTd(leilao.situacao);
+		
+		tr.appendChild(idTd)
+		tr.appendChild(descricaoTd);
+		tr.appendChild(dataCriacaoTd);
+		tr.appendChild(valorInicialTd);
+		tr.appendChild(situacaoTd);
+		tr.appendChild(valorArremateTd);
+		
+		
+
+		var tdEditar = montaTdControle(leilao, "editar");
+		var tdExcluir = montaTdControle(leilao, "excluir");
+
+		tr.appendChild(tdEditar);
+		tr.appendChild(tdExcluir);
+
+		tr.setAttribute("id", leilao.id);
+
+		return tr;
+	}
+	
+	function montaTdControle(leilao, tipo) {
+		var link = document.createElement("a");
+
+		const params = new URLSearchParams({
+			descricao: leilao.descricao,
+			operacao: tipo
+		});
+
+		link.textContent = tipo;
+		link.setAttribute('href', "listaDeLeilao?" + params.toString());
+		link.setAttribute('id', leilao.id);
+
+		if(tipo == "editar"){
+			link.classList.add("btn-editar");
+		}
+		
+		if(tipo == "excluir"){
+			link.classList.add("btn-excluir");
+		}
+		
+		
+		var tdControle = document.createElement("td");
+
+		tdControle.appendChild(link);
+		return tdControle;
+	}
+
+	function montaTd(dado) {
+		var td = document.createElement("td");
+		td.textContent = dado;
+		return td;
+	}
+	
+	
+	var ajax = new XMLHttpRequest();
+	ajax.responseType="text";
+	ajax.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var leilao = JSON.parse(ajax.responseText);
+			console.log(leilao);
+			atualizaTabela(leilao);
+		}
+	};
+	ajax.open("GET", "listaDeLeilao", true);
+	ajax.send();
+</script>
+
+<style>
+
+table{
+	border-collapse:collapse;
+	border:1px solid black;
+	padding: 10px;
+	text-align: center;
+}
+
+td, th {
+	border:1px solid black;
+	padding: 20px;
+}
+</style>
+
+</html>

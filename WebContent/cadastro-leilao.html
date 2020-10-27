@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  	<meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<title>Leilão</title>
+ 	<link rel="stylesheet" href="./public/css/page-leilao.css">
+ 	<link rel="stylesheet" href="./public/css/animation.css">
+ 	<link rel="stylesheet" href="./public/css/main.css">
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;1,800&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id="page-leilao">
+		<div id="container">
+			<header>
+				<h1>Cadastro de Leilão</h1>
+				<img class="logo animate-up"
+				id="logo"
+				src="./public/images/leilao.svg"
+				width="50" height="50"/>
+			</header>
+			<main>
+					<form action="listaDeLeilao" id="form" method="post">
+						<input type="hidden" name="id" id="id" />
+						<label class="animate-up" for="descricao">Descrição:</label><br>
+	  					<input class="animate-up" type="text" id="descricao" name="descricao"><br><br>
+	  					<label class="animate-up" for="valorInicial">Valor Inicial:</label><br>
+	 					<input class="animate-up" oninput="mascara(this, 0)" type="text" id="valorInicial" name="valorInicial" placeholder="Ex.: 1000"><br><br>
+	 					<label class="animate-up" for="dataCriacao">Data de Criação:</label><br>
+	 					<input class="animate-up" type="text" onkeyup="mascara(this, 1)" id="dataCriacao" name="dataCriacao"  placeholder="Ex.: aaaa/mm/dd" maxlength="10"><br><br>
+	 					
+	 					<label for="situacao">Escolha o estado do leilão:</label>
+	 					<select name="situacao" id="situacao">
+						    <option value="aberto">aberto</option>
+						    <option value="fechado">fechado</option>
+						    <option value="encerrado">encerrado</option>
+						 </select>
+						  <br><br>
+	 					<input class="animate-up" type="submit" onclick="gambiara()" name = "Salvar" value="Salvar">
+					</form>
+					
+					<section class="options">
+							<p>
+								<input class="animate-up" type="button" id= "limpar" onclick="limpar()" value="Limpar">
+							</p>
+							<a href="./index.html" title="Cancelar" class="animate-up">
+								<label>Cancelar</label>
+							</a>
+						</section>
+					
+					
+			</main>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	const searchParams = new URLSearchParams(location.search);
+	//const btnSalva = document.querySelector('#btn-salva');
+	
+	if (searchParams.get('descricao')) {
+		
+		var ajax = new XMLHttpRequest();
+		ajax.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var leilao = JSON.parse(ajax.responseText);
+				carregaDadosDoLeilao(leilao);
+			}
+		};
+		ajax.open("GET", "listaDeLeilao?descricao=" + searchParams.get('descricao')
+				+ "&origem=cadastro-leilao", true);
+		ajax.send();
+	}
+	
+	function carregaDadosDoLeilao(leilao) {
+		
+		inputDescricao = document.querySelector('#descricao');
+		inputValorInicial = document.querySelector('#valorInicial');
+		inputDataCriacao = document.querySelector("#dataCriacao");
+		inputSituacao = document.querySelector("#situacao");
+		inputId = document.querySelector("#id");
+		
+		//document.getElementById("cpf").disabled = true;
+		inputId.value = leilao.id;
+		inputDescricao.value = leilao.descricao;
+		inputValorInicial.value = leilao.valorInicial;
+		inputDataCriacao.value = leilao.dataCriacao;
+		inputSituacao.value = leilao.situacao;
+		
+	}
+	
+	//function gambiara(){
+		
+		
+		//document.getElementById("cpf").disabled = false;
+	//}
+	
+	
+	function mascara(i, data){
+	   
+	   var v = i.value;
+	   
+	   if(isNaN(v[v.length-1])){ // impede entrar outro caractere que não seja número
+	      i.value = v.substring(0, v.length-1);
+	      return;
+	   }
+	   
+	   if(data== 1){
+		   if (v.length == 4 || v.length == 7) i.value += "/";
+	   }
+	  
+
+	}
+	
+	function limpar(){
+		document.getElementById('descricao').value='';
+		//if(document.getElementById("valorInicial").disabled == false){
+			document.getElementById('dataCriacao').value= null;
+		//}
+		document.getElementById('valorInicial').value= '';
+		document.getElementById('situacao').value = "aberto";
+	}
+	
+	
+		
+</script>
+</html>

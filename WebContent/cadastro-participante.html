@@ -27,17 +27,20 @@
 	 					<input class="animate-up" oninput="mascara(this, 0)" type="text" id="cpf" name="cpf" placeholder="Ex.: 000.000.000-00" maxlength="14"><br><br>
 	 					<label class="animate-up" for="dataAniversario">Data de Nascimento:</label><br>
 	 					<input class="animate-up" type="text" onkeyup="mascara(this, 1)" id="dataAniversario" name="dataAniversario"  placeholder="Ex.: aaaa/mm/dd" maxlength="10"><br><br>
-	 					<input class="animate-up" type="submit" onclick="gambiara()" value="Salvar">
-					</form>
-					
-					<section class="options">
+	 					
+						<section class="options">
+							<input class="animate-up" type="submit" onclick="gambiara()" name="Salvar" value="Salvar">
+							<br><br>
 							<p>
 								<input class="animate-up" type="button" id= "limpar" onclick="limpar()" value="Limpar">
 							</p>
+							<br>
 							<a href="./index.html" title="Cancelar" class="animate-up">
 								<label>Cancelar</label>
 							</a>
 						</section>
+					</form>
+					
 					
 					
 			</main>
@@ -68,17 +71,20 @@
 		inputCpf = document.querySelector('#cpf');
 		inputName = document.querySelector('#name');
 		inputDataNascimento = document.querySelector("#dataAniversario");
-		
 		document.getElementById("cpf").disabled = true;
 		inputCpf.value = participante.cpf;
 		inputName.value = participante.name;
 		inputDataNascimento.value = participante.dataAniversario;
+		
 	}
 	
-	function gambiara(){
+	function gambiara(){	
 		document.getElementById("cpf").disabled = false;
 	}
 	
+	function vazio(){
+		
+	}
 	function mascara(i, data){
 	   
 	   var v = i.value;
@@ -105,5 +111,8 @@
 		}
 		document.getElementById('dataAniversario').value= null;
 	}
+	
+	
+		
 </script>
 </html>
