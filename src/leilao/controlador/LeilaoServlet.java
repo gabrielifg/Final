@@ -103,8 +103,8 @@ public class LeilaoServlet extends HttpServlet{
 				ldao.salva(leilao);
 				resp.sendRedirect("listaDeLeilao.html");
 			}else {
-				System.out.println("Não é possível cadastrar um leilão com 5 anos de antecedencia ou"
-						+ " um leilão com mais de 5 anos");
+				System.out.println("Não é possível cadastrar um leilão com 5 anos de antecedência ou"
+						+ " um leilão com mais de 5 anos de existência");
 				resp.sendRedirect("cadastro-leilao.html");
 			}
 		

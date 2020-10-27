@@ -38,7 +38,7 @@ public class ParticipanteServlet extends HttpServlet{
 			dao.salva(participante);
 			resp.sendRedirect("listaDeParticipantes.html");
 		}else {
-			System.out.println("Só é possível cadastra pessoas com menos de 18 anos ou mais de 120 ");
+			System.out.println("Só é possível cadastra pessoas com mais de 18 e menos de 120 anos");
 			resp.sendRedirect("cadastro-participante.html");
 		}
 		

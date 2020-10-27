@@ -23,11 +23,11 @@
 					<form action="listaDeLeilao" id="form" method="post">
 						<input type="hidden" name="id" id="id" />
 						<label class="animate-up" for="descricao">Descrição:</label><br>
-	  					<input class="animate-up" type="text" id="descricao" name="descricao"><br><br>
+	  					<input class="animate-up" required type="text" id="descricao" name="descricao"><br><br>
 	  					<label class="animate-up" for="valorInicial">Valor Inicial:</label><br>
-	 					<input class="animate-up" oninput="mascara(this, 0)" type="text" id="valorInicial" name="valorInicial" placeholder="Ex.: 1000"><br><br>
+	 					<input class="animate-up" required oninput="mascara(this, 0)" type="text" id="valorInicial" name="valorInicial" placeholder="Ex.: 1000"><br><br>
 	 					<label class="animate-up" for="dataCriacao">Data de Criação:</label><br>
-	 					<input class="animate-up" type="text" onkeyup="mascara(this, 1)" id="dataCriacao" name="dataCriacao"  placeholder="Ex.: aaaa/mm/dd" maxlength="10"><br><br>
+	 					<input class="animate-up" required type="text" onkeyup="mascara(this, 1)" id="dataCriacao" name="dataCriacao"  placeholder="Ex.: aaaa/mm/dd" maxlength="10"><br><br>
 	 					
 	 					<label for="situacao">Escolha o estado do leilão:</label>
 	 					<select name="situacao" id="situacao">
